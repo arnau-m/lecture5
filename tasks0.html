@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
 
-                document.querySelector('form').onsubmit = () => {
+<head>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
-                    // Create new item for list
-                    const li = document.createElement('li');
-                    li.innerHTML = document.querySelector('#task').value;
+            // submit button is disabled
+            document.querySelector('#submit').disabled = true;
 
-                    // Add new item to task list
-                    document.querySelector('#tasks').append(li);
+            document.querySelector('#task').onkeyup = () => {
+                if (document.querySelector('#task').value.length > 0) {
+                    document.querySelector('#submit').disabled = false;
+                }
+                else {
+                    document.querySelector('#submit').disabled = true;
+                }
+            }
+            document.querySelector('form').onsubmit = () => {
+                const task = document.querySelector('#task').value;
 
-                    // Clear input field
-                    document.querySelector('#task').value = '';
+                const li = document.createElement('li');
+                li.innerHTML = task;
 
-                    // Stop form from submitting
-                    return false;
-                };
+                document.querySelector('#tasks').append(li);
 
-            });
-        </script>
-        <title>Tasks</title>
-    </head>
-    <body>
-        <h1>Tasks</h1>
-        <ul id="tasks">
-        </ul>
-        <form>
-            <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
-            <input type="submit">
-        </form>
-    </body>
+                document.querySelector('#task').value = '';
+                document.querySelector('#submit').disabled = true;
+
+
+                //Stop form from submitting
+                return false;
+            }
+        });
+    </script>
+    <title>Tasks</title>
+</head>
+
+<body>
+    <h1>Tasks</h1>
+    <ul id="tasks">
+    </ul>
+    <form>
+        <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+        <input type="submit" id="submit">
+    </form>
+</body>
+
 </html>

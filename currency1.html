@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <title>Currency</title>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+<title>Currency</title>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
 
-            document.querySelector('form').onsubmit = function() {
-                fetch("https://api.exchangeratesapi.io/latest?base=USD")
+        document.querySelector('form').onsubmit = function () {
+            fetch("https://api.exchangeratesapi.io/latest?base=USD")
                 .then(response => response.json())
                 .then(data => {
                     const currency = document.querySelector('#currency').value.toUpperCase();
@@ -20,16 +20,18 @@
                 .catch(error => {
                     console.log('Error:', error);
                 });
-                return false;
-            }
-        });
-    </script>
-    <body>
-        <form>
-            <input id="currency" placeholder="Currency">
-            <input type="submit" value="Convert">
-        </form>
-        <div id="result">
-        </div>
-    </body>
+            return false;
+        }
+    });
+</script>
+
+<body>
+    <form>
+        <input id="currency" placeholder="Currency">
+        <input type="submit" value="Convert">
+    </form>
+    <div id="result">
+    </div>
+</body>
+
 </html>
