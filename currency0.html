@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <title>Currency</title>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+<title>Currency Exchange</title>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelector('#select').onchange = function () {
             fetch("https://api.exchangeratesapi.io/latest?base=USD")
-            .then(response => response.json())
-            .then(data => {
-                const rate = data.rates.EUR;
-                document.querySelector('body').innerHTML = rate;
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            });
-        });
-    </script>
-    <body>
-    </body>
+                .then(response => response.json())
+                .then(data => {
+                    const currency = this.value;
+                    const rate = data.rates[currency];
+                    if (rate !== undefined) {
+                        const result = `1 USD is equal to ${rate.toFixed(3)} ${currency}`;
+                        document.querySelector('#result').innerHTML = result;
+                    } else {
+                        document.querySelector('#result').innerHTML = 'Invalid currency.';
+                    }
+                })
+
+
+        }
+    });
+</script>
+
+<body>
+    <select id="select">
+        <option value="EUR">Euros</option>
+        <option value="GBP">Pownds</option>
+        <option value="JPY">Japanes Yenes</option>
+        <option value="MXN">Mexico</option>
+    </select>
+
+    <div id="result">
+    </div>
+</body>
+
 </html>
